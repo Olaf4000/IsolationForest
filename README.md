@@ -2,7 +2,7 @@
 
 ## How to
 
-Insert data into the `/data` folder. It has to be in the JSON format.
+Insert data into the `/data/logs.json` folder. It has to be in the JSON format.
 A single log entry should look like this:
 
 ```json
