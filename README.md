@@ -18,6 +18,15 @@ A single log entry should look like this:
   }
 ```
 
+## Data
+
+### input data
+
+| name | usage                                          |
+|:-----|:-----------------------------------------------|
+|logs  |raw log files as JSON list                      |
+|l3T   |noramized and augmented log files as a CSV file |
+
 ## sample results
 
 ### first attempt of isolation forest
