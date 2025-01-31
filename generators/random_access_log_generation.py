@@ -1,9 +1,11 @@
 import random
 import string
 
+from urllib3 import request
+
 # input variables
-min_amount = 800
-max_amount = 900
+min_amount = 600
+max_amount = 1100
 average_amount = 500 #TODO: do dis shit
 amount_of_anomaly = 4
 amount_of_client = 500
@@ -63,21 +65,28 @@ def generate_multiple_random_ips(amount_of_ips):
 
 # generation
 def generate_random_logs():
+    host_counter = 0
+    client_counter = 0
+    request_counter = 0
+
     with open("../data/logs.csv", mode="w") as file:
         file.write('timestamp,action,host,clientIp,country,uri' + '\n')
 
         for i in range(amount_of_hoste):
             host = str(generate_random_host())
+            host_counter += 1
             print('-------------- ' + str(host) + ' --------------')
 
             #generate_noise
             print('Generating noise for: ' + str(host))
             for j in range(amount_of_client):
                 client_ip = str(generate_random_ip())
+                client_counter += 1
                 amount_of_requests = int(random.uniform(min_amount, max_amount))
 
                 for k in range(amount_of_requests):
                     timestamp = random_timestamp()
+                    request_counter += 1
                     file.write(
                         str(timestamp) + ',' +
                         'ALLOW' + ',' +
@@ -111,7 +120,7 @@ def generate_random_logs():
                 amount_of_requests = int((random.uniform(min_amount, max_amount)) - min_amount)
 
                 for k in range(amount_of_requests):
-                    timestamp = random_timestamp()
+                    timestamp = int(random_timestamp() / 3)
                     file.write(
                         str(timestamp) + ',' +
                         'ALLOW' + ',' +
@@ -122,5 +131,8 @@ def generate_random_logs():
                     )
             print('-----------------------------------------')
     print("Successfully generated random logs")
+    print("Hosts generated: " + str(host_counter))
+    print("Clients generated: " + str(client_counter))
+    print("Requests generated: " + str(request_counter))
 
 generate_random_logs()
